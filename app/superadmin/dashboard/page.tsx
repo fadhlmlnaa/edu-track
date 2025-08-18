@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   return (
     <div className="p-8">
       <h1 className="text-2xl">Dashboard Admin</h1>
-      <p className="mt-4">Halo! Teacher, {data.user?.email}</p>
+      <p className="mt-4">Halo! SuperAdmin, {data.user?.email}</p>
       <LogoutButton />
     </div>
   );

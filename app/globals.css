@@ -4,13 +4,12 @@
   --background: #ffffff;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-  }
-} */
-
 body {
   background: var(--background);
   font-family: var(--font-poppins);
+}
+
+.Toastify__toast {
+  font-family: var(--font-poppins) !important;
+  font-size: 14px;
 }

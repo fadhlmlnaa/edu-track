@@ -5,6 +5,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/client-supabase";
 import { useRouter } from "next/navigation";
 import { Slide, ToastContainer, toast } from "react-toastify";
+import Loading from "@/components/Loading";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,16 +27,8 @@ export default function Login() {
     setLoading(false);
 
     if (error?.code == "invalid_credentials") {
-      toast.error("Email atau password salah", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      setLoading(false);
+      toast.error("Email atau password salah");
     } else {
       router.push("/admin/dashboard");
     }
@@ -43,7 +36,6 @@ export default function Login() {
 
   return (
     <>
-      <ToastContainer transition={Slide} />
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
@@ -51,7 +43,8 @@ export default function Login() {
             src="/assets/image/logo-tutwuri.png"
             width={200}
             height={200}
-            className="mx-auto"
+            className="w-36 h-auto mx-auto"
+            priority
           />
           <h2 className="mt-8 text-start text-2xl/9 font-bold tracking-tight">
             Portal Akademik Sekolah
@@ -62,6 +55,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        {loading && <Loading />}
           <form action="#" method="POST" className="space-y-6">
             <div>
               <label

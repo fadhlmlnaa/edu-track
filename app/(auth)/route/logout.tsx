@@ -23,10 +23,14 @@ export default function LogoutButton() {
       {loading && <Loading />}
       <div className="flex items-center gap-2 w-full py-3.5 px-5 hover:bg-[#d1d5dc]">
         <ArrowLeftEndOnRectangleIcon className="h-6 w-6 text-cyan-800" />
-        <button onClick={handleLogout} className="flex w-full rounded cursor-pointer items-center justify-start">
+        <button
+          onClick={handleLogout}
+          className="flex w-full rounded cursor-pointer items-center justify-start"
+        >
           Logout
         </button>
       </div>
     </>
   );
 }
+

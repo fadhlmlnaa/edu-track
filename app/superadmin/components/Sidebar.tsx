@@ -77,7 +77,11 @@ export default function MySidebar() {
             >
               <MenuItem
                 component={<Link href="/superadmin/master/guru" />}
-                active={pathname === "/superadmin/master/guru"}
+                active={
+                  pathname === "/superadmin/master/guru" ||
+                  pathname === "/superadmin/master/guru/create" ||
+                  pathname === "/superadmin/master/guru/detail"
+                }
               >
                 Data Guru
               </MenuItem>
@@ -112,13 +116,13 @@ export default function MySidebar() {
           <div className="px-4 py-4 text-sm font-semibold opacity-70 mt-auto">
             {!collapsed && "Extra"}
           </div>
+          <Menu>{!collapsed && <LogoutButton />}</Menu>
           <Menu>
-            <LogoutButton />
-          </Menu>
-          <Menu>
-            <MenuItem disabled>
-              <p className="text-sm">Copyright &copy; Fadhlmlnaa</p>
-            </MenuItem>
+            {!collapsed && (
+              <MenuItem disabled>
+                <p className="text-sm">Copyright &copy; Fadhlmlnaa</p>
+              </MenuItem>
+            )}
           </Menu>
         </div>
       </Sidebar>

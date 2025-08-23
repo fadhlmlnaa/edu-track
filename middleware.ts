@@ -15,6 +15,7 @@ export async function middleware(req: NextRequest) {
   }
 
   const isSuperAdmin = user.user_metadata?.is_super_admin === true;
+  
   const pathname = req.nextUrl.pathname;
 
   // 🚨 Jika user BUKAN superadmin tapi coba akses /superadmin

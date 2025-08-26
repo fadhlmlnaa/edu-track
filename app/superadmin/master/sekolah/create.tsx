@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { createClient } from "@/lib/client-supabase";
 import Button from "../../components/Button";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function CreateSekolahForm({
   onSuccess,
@@ -33,8 +34,7 @@ export default function CreateSekolahForm({
     setLoading(false);
 
     if (error) {
-      console.error(error);
-      setErrorMsg(error.message);
+      toast.error(error.message);
       return;
     }
 
@@ -47,6 +47,7 @@ export default function CreateSekolahForm({
 
     // Atau redirect ke halaman list
     router.refresh();
+    toast.success("Sekolah berhasil ditambahkan");
   };
 
   return (
@@ -59,7 +60,7 @@ export default function CreateSekolahForm({
           value={nama}
           onChange={(e) => setNama(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md 
-            focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400"
+            focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
           placeholder="Input nama sekolah"
           required
         />
@@ -71,7 +72,7 @@ export default function CreateSekolahForm({
           value={alamat}
           onChange={(e) => setAlamat(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md 
-            focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400"
+            focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
           placeholder="Input alamat sekolah"
           required
         />

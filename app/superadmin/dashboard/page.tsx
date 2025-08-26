@@ -3,6 +3,7 @@ import { createClient } from "@/lib/client";
 export default async function DashboardPage() {
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
+  console.log(data);
 
   return (
     <div className="p-8">

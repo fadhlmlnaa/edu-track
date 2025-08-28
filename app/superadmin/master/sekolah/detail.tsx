@@ -21,7 +21,7 @@ export default function DetailSekolah({
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false); // 👉 mode edit / detail
-  const [form, setForm] = useState({ nama: "", alamat: "" });
+  const [form, setForm] = useState({ nama: "", alamat: "", kontak: "" });
 
   useEffect(() => {
     if (!id) return;
@@ -37,7 +37,11 @@ export default function DetailSekolah({
 
       if (!error && data) {
         setData(data);
-        setForm({ nama: data.nama ?? "", alamat: data.alamat ?? "" });
+        setForm({
+          nama: data.nama ?? "",
+          alamat: data.alamat ?? "",
+          kontak: data.kontak ?? "",
+        });
       }
       setLoading(false);
     };
@@ -64,6 +68,7 @@ export default function DetailSekolah({
       .update({
         nama: form.nama,
         alamat: form.alamat,
+        kontak: form.kontak,
       })
       .eq("id", id);
 
@@ -103,6 +108,15 @@ export default function DetailSekolah({
               onChange={(e) => setForm({ ...form, alamat: e.target.value })}
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium">Kontak</label>
+            <input
+              type="text"
+              className="border rounded px-2 py-1 w-full border-gray-300 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+              value={form.kontak}
+              onChange={(e) => setForm({ ...form, kontak: e.target.value })}
+            />
+          </div>
           <div className="flex justify-end gap-2">
             <Button variant="secondary" onClick={() => setIsEdit(false)}>
               Batal
@@ -123,6 +137,9 @@ export default function DetailSekolah({
             <p>
               <strong className="font-medium">Alamat Sekolah :</strong>{" "}
               {data.alamat}
+            </p>
+            <p>
+              <strong className="font-medium">Kontak :</strong> {data.kontak}
             </p>
           </div>
           <div className="flex justify-end gap-2 mt-4">

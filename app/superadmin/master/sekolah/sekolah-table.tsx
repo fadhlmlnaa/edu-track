@@ -14,6 +14,7 @@ export default function SekolahTable({
     id: string;
     nama: string;
     alamat: string;
+    kontak: string;
   }[];
   page: number;
   totalPages: number;
@@ -45,6 +46,7 @@ export default function SekolahTable({
               <th className="p-2 text-center border border-gray-300">
                 Alamat Sekolah
               </th>
+              <th className="p-2 text-center border border-gray-300">Kontak</th>
               <th className="p-2 text-center border border-gray-300">Detail</th>
             </tr>
           </thead>
@@ -57,6 +59,7 @@ export default function SekolahTable({
                   </td>
                   <td className="p-2 border border-gray-300">{item.nama}</td>
                   <td className="p-2 border border-gray-300">{item.alamat}</td>
+                  <td className="p-2 border border-gray-300">{item.kontak}</td>
                   <td className="p-2 border border-gray-300">
                     <button
                       className="w-full bg-blue-50 hover:text-blue-600 cursor-pointer text-blue-800 px-4 py-2 rounded"

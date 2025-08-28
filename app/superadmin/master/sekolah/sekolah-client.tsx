@@ -19,6 +19,7 @@ export default function SekolahPage({
     id: string;
     nama: string;
     alamat: string;
+    kontak: string;
   }[];
   id: string | null;
   page: number;
@@ -37,7 +38,8 @@ export default function SekolahPage({
     (item) =>
       item.id === id ||
       item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.alamat.toLowerCase().includes(searchTerm.toLowerCase())
+      item.alamat.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.kontak.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

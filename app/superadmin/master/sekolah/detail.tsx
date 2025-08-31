@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { createClient } from "@/lib/client-supabase";
 import ModalForm from "../../components/ModalForm";
-import Button from "../../components/Button";
+import Button from "../../../../components/Button";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 

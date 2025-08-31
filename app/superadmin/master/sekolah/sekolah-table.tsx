@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Button from "../../components/Button";
+import Button from "../../../../components/Button";
 import DetailSekolah from "./detail";
 
 export default function SekolahTable({

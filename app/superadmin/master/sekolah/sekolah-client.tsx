@@ -3,7 +3,7 @@ import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import ModalForm from "../../components/ModalForm";
-import Button from "../../components/Button";
+import Button from "../../../../components/Button";
 import { PlusIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import CreateSekolah from "./create";
 import SekolahTable from "./sekolah-table";

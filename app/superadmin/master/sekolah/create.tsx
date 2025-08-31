@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { createClient } from "@/lib/client-supabase";
-import Button from "../../components/Button";
+import Button from "../../../../components/Button";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 

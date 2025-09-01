@@ -26,3 +26,20 @@ const Input: React.FC<InputProps> = ({ variant = "default", className, ...props 
 };
 
 export default Input;
+
+interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+export function NumberInput(props: NumberInputProps) {
+  return (
+    <Input
+      type="number"
+      variant="default"
+      {...props}
+      className={`w-full border rounded p-2 [appearance:textfield] 
+                  [&::-webkit-outer-spin-button]:appearance-none 
+                  [&::-webkit-inner-spin-button]:appearance-none 
+                  ${props.className || ""}`}
+      onWheel={(e) => (e.target as HTMLInputElement).blur()} // anti scroll naik/turun
+    />
+  );
+}

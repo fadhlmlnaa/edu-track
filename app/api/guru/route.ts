@@ -5,12 +5,13 @@ export async function POST(req: Request) {
   const supabase = createAdminClient();
   const { email, password, nama, sekolah_id, nip, gender, telp } = await req.json();
 
-  // 1. create user
-  const { data: userData, error: authError } = await supabase.auth.admin.createUser({
-    email,
-    password,
-    email_confirm: true,
-  });
+  // 1. buat user di auth
+  const { data: userData, error: authError } =
+    await supabase.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+    });
 
   if (authError) {
     return NextResponse.json({ error: authError.message }, { status: 400 });
@@ -35,4 +36,6 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ success: true, user: userData.user });
+
+  
 }

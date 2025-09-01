@@ -18,7 +18,7 @@ const variantClasses: Record<Variant, string> = {
   secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300",
   danger: "bg-red-600 text-white hover:bg-red-700",
   pagination: "bg-transparent border border-gray-500 text-gray-500 text-sm hover:bg-gray-500 hover:text-white",
-  ghost: "bg-transparent text-gray-700 hover:bg-gray-100",
+  ghost: "bg-gray-500 text-gray-100 hover:bg-gray-700",
 };
 
 export default function Button({

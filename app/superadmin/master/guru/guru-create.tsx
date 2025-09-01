@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import Input from "@/components/Input";
+import Input, { NumberInput } from "@/components/Input";
 import Loading from "@/components/Loading";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { createGuru, getSekolahList } from "./lib/guru-services";
 import { toast } from "react-toastify";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export default function CreateGuruForm({
   onSuccess,
@@ -28,9 +29,18 @@ export default function CreateGuruForm({
     sekolah_id: "",
   });
 
+  const [showPassword, setShowPassword] = useState(true);
+
+  const isFormValid = Object.values(formData).every((val) => val.trim() !== "");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    if (!isFormValid) {
+      toast.error("Form wajib terisi");
+      setLoading(false);
+      return;
+    }
     try {
       await createGuru(formData);
       toast.success("Guru berhasil ditambahkan");
@@ -60,7 +70,9 @@ export default function CreateGuruForm({
       {loading && <Loading />}
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
-          <label className="block text-sm font-medium">Nama :</label>
+          <label className="block text-sm font-medium">
+            Nama<span className="text-red-500">*</span>:
+          </label>
           <Input
             type="text"
             value={formData.nama}
@@ -68,7 +80,9 @@ export default function CreateGuruForm({
             placeholder="Nama"
             variant="default"
           />
-          <label className="block text-sm font-medium">NIP :</label>
+          <label className="block text-sm font-medium">
+            NIP<span className="text-red-500">*</span>:
+          </label>
           <Input
             type="text"
             value={formData.nip}
@@ -76,7 +90,9 @@ export default function CreateGuruForm({
             placeholder="NIP"
             variant="default"
           />
-          <label className="block text-sm font-medium">Gender :</label>
+          <label className="block text-sm font-medium">
+            Gender<span className="text-red-500">*</span>:
+          </label>
           <select
             value={formData.gender}
             onChange={(e) =>
@@ -89,17 +105,19 @@ export default function CreateGuruForm({
             <option value="Laki-laki">Laki-laki</option>
             <option value="Perempuan">Perempuan</option>
           </select>
-          <label className="block text-sm font-medium">Nomor Telepon :</label>
-          <Input
-            type="text"
+          <label className="block text-sm font-medium">
+            Nomor Telepon<span className="text-red-500">*</span>:
+          </label>
+          <NumberInput
             value={formData.telp}
             onChange={(e) => setFormData({ ...formData, telp: e.target.value })}
             placeholder="Nomor Telepon"
-            variant="default"
           />
-          <label className="block text-sm font-medium">Email :</label>
+          <label className="block text-sm font-medium">
+            Email<span className="text-red-500">*</span>:
+          </label>
           <Input
-            type="text"
+            type="email"
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
@@ -107,17 +125,34 @@ export default function CreateGuruForm({
             placeholder="Email"
             variant="default"
           />
-          <label className="block text-sm font-medium">Password :</label>
-          <Input
-            type="text"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            placeholder="Password"
-            variant="default"
-          />
-          <label className="block text-sm font-medium">Sekolah :</label>
+          <label className="block text-sm font-medium">
+            Password<span className="text-red-500">*</span>:
+          </label>
+          <div className="relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              placeholder="Password"
+              variant="default"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
+            >
+              {showPassword ? (
+                <EyeSlashIcon className="w-5 h-5" />
+              ) : (
+                <EyeIcon className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+          <label className="block text-sm font-medium">
+            Sekolah<span className="text-red-500">*</span>:
+          </label>
           <select
             value={formData.sekolah_id}
             onChange={(e) =>
@@ -134,7 +169,11 @@ export default function CreateGuruForm({
             ))}
           </select>
           <div className="flex justify-end">
-            <Button type="submit" variant="primary" disabled={loading}>
+            <Button
+              type="submit"
+              variant={isFormValid ? "primary" : "ghost"}
+              disabled={!isFormValid || loading}
+            >
               {loading ? "Menyimpan..." : "Tambah Guru"}
             </Button>
           </div>
